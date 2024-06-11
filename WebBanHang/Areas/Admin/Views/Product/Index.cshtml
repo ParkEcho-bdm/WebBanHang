@@ -10,6 +10,17 @@
         </a>
     </div>
 </div>
+<div class="row">
+    <div class="co-md-12 text-center">
+        <from asp-action="Index" method="post">
+            <div class="from-inline">
+                Name<input name="textsearch" class="from-control" >
+                <button type="submit" class="btn byn-sacondary">Search</button>
+
+            </div>
+        </from>
+    </div>
+</div>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -30,7 +41,7 @@
                 <td>
                     @if (x.ImageUrl != null)
                     {
-                        <img src="@x.ImageUrl" style="width:100px" />
+                        <img src="/@x.ImageUrl" style="width:100px" />
                     }
                 </td>
                 <td>

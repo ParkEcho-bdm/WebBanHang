@@ -12,6 +12,8 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
+
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -20,6 +22,20 @@ namespace WebBanHang.Controllers
         {
             _db = db;
             _hosting = hosting;
+        }
+        // hiện thi danh sacash sản phâm cần quản lý
+        [HttpGet]
+        public IActionResult Index(int ?page,string textsearch="")
+        {
+            var pageIndex = (int)(page != null ? page : 1);
+            var pageSize = 10;
+
+            var dsSanpham = _db.Products.Include(x => x.Category).Where(p => p.Name.ToLower().Contains(textsearch.ToLower())).ToList();
+            var PageSum = dsSanpham.Count() / pageSize + (dsSanpham.Count() % pageSize > 0 ? 1 : 0); 
+            ViewBag.PageSum = PageSum;
+            ViewBag.PageIndex = pageIndex;
+            return View(dsSanpham.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList());
+
         }
         //Hiển thị danh sách sản phẩm
         public IActionResult Index()

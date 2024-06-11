@@ -7,6 +7,8 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
+    [Area("Admin")]
+   
     public class CategoryController : Controller
     {
 
