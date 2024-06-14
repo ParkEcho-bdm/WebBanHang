@@ -187,5 +187,15 @@ namespace WebBanHang.Controllers
             //chuyen den action index
             return RedirectToAction("Index");
         }
+        #region CallAPI
+        //Call API
+        //Lấy tất cả các sản phẩm
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var productList = _db.Products.Include(x => x.Category).ToList();
+            return Json(productList);
+        }
+        #endregion
     }
 }
